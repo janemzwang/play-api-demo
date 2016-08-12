@@ -6,7 +6,7 @@ Setup Environment
 2. Install IDEA from https://www.jetbrains.com/idea/download/
 3. Download Activator from https://playframework.com/download
 4. Extract Activator to a location that doesn't require sudo permission to write.
-5. Add to your login profile. Usually, this is $HOME/.profile:
+5. Add to your login profile. Usually, this is ~/.profile or ~/.bash_profile:
     export PATH=/path/to/activator-x.x.x:$PATH
    
     Make sure that the activator script is executable. If it’s not:
