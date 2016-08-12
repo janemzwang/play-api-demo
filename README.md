@@ -28,3 +28,9 @@ Setup Project in IDEA
 4. Select "Import project from external model" with SBT. Click Next.
 5. Check "Use auto-import". Make sure Project SDK is set to "1.8".
 6. Click Finish
+
+
+Setup MySQL
+
+From http://dev.mysql.com/downloads/, download and install the Community Server. WorkBench is also recommended.
+
