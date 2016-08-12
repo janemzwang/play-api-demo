@@ -18,3 +18,13 @@ Setup Environment
    
     activator run
 8. Go to http://localhost:9000
+
+
+Setup Project in IDEA
+
+1. Open IDEA
+2. File -> New -> Project from Existing Sources...
+3. Select play-api-demo that you just created.
+4. Select "Import project from external model" with SBT. Click Next.
+5. Check "Use auto-import". Make sure Project SDK is set to "1.8".
+6. Click Finish
