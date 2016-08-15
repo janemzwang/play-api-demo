@@ -2,11 +2,14 @@ package controllers;
 
 import com.google.gson.*;
 import com.google.inject.Injector;
+import com.typesafe.config.ConfigFactory;
+import dao.BaseDao;
 import dao.DaoFactory;
 import exceptions.DemoException;
 import models.BaseModel;
 import models.annotations.Orderable;
 import models.annotations.Queryable;
+import models.responses.PluralResponse;
 import models.responses.SingularResponse;
 import org.apache.commons.lang3.StringUtils;
 import org.joda.time.DateTime;
@@ -47,6 +50,42 @@ public class BaseController extends Controller {
     String jsonResponse = jsonifyResponse(response);
 
     return F.Promise.pure(ok(jsonResponse));
+  }
+
+  /**
+   * supported calls:
+   * 1. /api/property?status=open
+   * 2. /api/property?cityId=1
+   * 3. /api/property?boroughId=1&boroughId=2&boroughId=3&status=open
+   * 4. /api/property?created_on=DATETIME TODO
+   * @return
+   */
+  @Transactional
+  public F.Promise<Result> get() {
+    long startTime = new DateTime().getMillis();
+    BaseDao dao = DaoFactory.get(getInjectedModelClass());
+    BaseModel model = injector.getInstance(BaseModel.class);
+    StringBuffer hql = new StringBuffer(String.format("FROM %s WHERE 1 = 1 ", model.getClass().getName()));
+
+    try {
+      PaginationContext paginationContext = extractPaginationContext();
+      List<BaseModel> objects = dao.findPaginatedResultByQuery(
+          hql.toString(), paginationContext);
+      long duration = new DateTime().getMillis() - startTime;
+      PluralResponse response = new PluralResponse(startTime, duration).setResults(objects);
+      String jsonResponse = jsonifyResponse(response);
+
+      return F.Promise.pure(ok(jsonResponse));
+    } catch (Exception e) {
+      play.Logger.error("get failed", e);
+      return F.Promise.pure(internalServerError(e.getMessage()));
+    }
+  }
+
+  protected PaginationContext extractPaginationContext() {
+    Map<String, String[]> params = request().queryString();
+    return new PaginationContext(params.keySet().contains("psize") ? Integer.parseInt(params.get("psize")[0]) : ConfigFactory.load().getInt("default_page_size"),
+        (params.keySet().contains("pid")) ? Integer.parseInt(params.get("pid")[0]) : 0);
   }
 
   /**
