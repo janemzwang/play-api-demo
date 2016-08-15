@@ -21,10 +21,6 @@ public class Property extends BaseModel {
   @Column(name = "mls_id")
   public Long mlsId;
 
-  @Column(name = "status")
-  @Constraints.Pattern(value="initial|open|closed", message = "error.property.status.invalid")
-  public String status = "initial";
-
   @Column(name = "market_status")
   @Constraints.Pattern(value="off_market|for_sale|pending|auction|foreclosure|new_construction|coming_soon|sold|for_rent|foreclosed|lot/land|make_me_move", message = "error.property.market_status.invalid")
   public String marketStatus = "off_market";
