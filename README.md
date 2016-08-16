@@ -36,5 +36,6 @@ From http://dev.mysql.com/downloads/, download and install the Community Server.
 
 
 Run Play app in Debug Mode
+
 Add this to .bash_profile: alias act_d="activator -jvm-debug 9999"
 
