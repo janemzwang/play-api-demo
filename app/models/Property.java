@@ -1,59 +1,128 @@
 package models;
 
-import com.google.gson.annotations.Until;
 import play.data.validation.Constraints;
-
-import javax.persistence.*;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
 
 /**
  * @author Kang Kang Wang
  */
-@Entity
-@Table(name = "property")
 public class Property {
-  @Id
-  @GeneratedValue(strategy= GenerationType.IDENTITY)
-  @Column(name = "id")
-  public Long id;
 
-  @Column(name = "mls_id")
-  public Long mlsId;
+  private Long id;
 
-  @Column(name = "market_status")
+  private Long mlsId;
+
   @Constraints.Pattern(value="off_market|for_sale|pending|auction|foreclosure|new_construction|coming_soon|sold|for_rent|foreclosed|lot/land|make_me_move", message = "error.property.market_status.invalid")
-  public String marketStatus = "off_market";
+  private String marketStatus = "off_market";
 
-  @Column(name = "property_type")
   @Constraints.Pattern(value="condo|cooperative|townhouse|apartment|multi_family|single_family", message = "error.property.type.invalid")
-  public String propertyType;
+  private String propertyType;
 
-  @Column(name = "listing_price")
-  @Min(value = 0, message = "error.property.listingPrice.negative")
-  public Integer listingPrice;
+  @Constraints.Min(value = 0, message = "error.property.listingPrice.negative")
+  private Integer listingPrice;
 
-  @Column(name = "num_bedroom")
-  @Min(value = 0, message = "error.property.numOfBedrooms.negative")
-  public Integer numOfBedrooms;
+  @Constraints.Min(value = 0, message = "error.property.numOfBedrooms.negative")
+  private Integer numOfBedrooms;
 
-  @Column(name = "num_full_bath")
-  @Min(value = 0, message = "error.property.numOfBaths.negative")
-  public Integer numOfFullBaths;
+  @Constraints.Min(value = 0, message = "error.property.numOfBaths.negative")
+  private Integer numOfFullBaths;
 
-  @Column(name = "num_half_bath")
-  @Min(value = 0, message = "error.property.numOfBaths.negative")
-  public Integer numOfHalfBaths;
+  @Constraints.Min(value = 0, message = "error.property.numOfBaths.negative")
+  private Integer numOfHalfBaths;
 
-  @Column(name = "total_room")
-  @Min(value = 0, message = "error.property.totalNumOfRooms.negative")
-  public Integer totalNumOfRooms;
+  @Constraints.Min(value = 0, message = "error.property.totalNumOfRooms.negative")
+  private Integer totalNumOfRooms;
 
-  @Column(name = "build_year")
-  @Min(value = 1500, message = "error.property.buildYear.min")
-  @Max(value = 3000, message = "error.property.buildYear.max")
-  public Integer buildYear;
+  @Constraints.Min(value = 1500, message = "error.property.buildYear.min")
+  @Constraints.Max(value = 3000, message = "error.property.buildYear.max")
+  private Integer buildYear;
 
-  @Column(name = "published_on")
-  public Long publishedOn;
+  private Long publishedOn;
+
+  public Long getId() {
+    return id;
+  }
+
+  public void setId(Long id) {
+    this.id = id;
+  }
+
+  public Long getMlsId() {
+    return mlsId;
+  }
+
+  public void setMlsId(Long mlsId) {
+    this.mlsId = mlsId;
+  }
+
+  public String getMarketStatus() {
+    return marketStatus;
+  }
+
+  public void setMarketStatus(String marketStatus) {
+    this.marketStatus = marketStatus;
+  }
+
+  public String getPropertyType() {
+    return propertyType;
+  }
+
+  public void setPropertyType(String propertyType) {
+    this.propertyType = propertyType;
+  }
+
+  public Integer getListingPrice() {
+    return listingPrice;
+  }
+
+  public void setListingPrice(Integer listingPrice) {
+    this.listingPrice = listingPrice;
+  }
+
+  public Integer getNumOfBedrooms() {
+    return numOfBedrooms;
+  }
+
+  public void setNumOfBedrooms(Integer numOfBedrooms) {
+    this.numOfBedrooms = numOfBedrooms;
+  }
+
+  public Integer getNumOfFullBaths() {
+    return numOfFullBaths;
+  }
+
+  public void setNumOfFullBaths(Integer numOfFullBaths) {
+    this.numOfFullBaths = numOfFullBaths;
+  }
+
+  public Integer getNumOfHalfBaths() {
+    return numOfHalfBaths;
+  }
+
+  public void setNumOfHalfBaths(Integer numOfHalfBaths) {
+    this.numOfHalfBaths = numOfHalfBaths;
+  }
+
+  public Integer getTotalNumOfRooms() {
+    return totalNumOfRooms;
+  }
+
+  public void setTotalNumOfRooms(Integer totalNumOfRooms) {
+    this.totalNumOfRooms = totalNumOfRooms;
+  }
+
+  public Integer getBuildYear() {
+    return buildYear;
+  }
+
+  public void setBuildYear(Integer buildYear) {
+    this.buildYear = buildYear;
+  }
+
+  public Long getPublishedOn() {
+    return publishedOn;
+  }
+
+  public void setPublishedOn(Long publishedOn) {
+    this.publishedOn = publishedOn;
+  }
 }

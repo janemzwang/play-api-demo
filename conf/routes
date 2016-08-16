@@ -8,5 +8,7 @@ GET     /                           controllers.HomeController.index
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
 
-GET     /api/property/:id           controllers.PropertyController.getById(id: Int)
-POST    /api/property               controllers.PropertyController.createProperty()
+GET     /api/property/:mlsId           controllers.PropertyController.getById(mlsId: Int)
+POST    /api/property                  controllers.PropertyController.createProperty()
+PUT     /api/property/:mlsId           controllers.PropertyController.updateProperty(mlsId: Int)
+DELETE  /api/property/:mlsId           controllers.PropertyController.deleteProperty(mlsId: Int)
