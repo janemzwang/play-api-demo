@@ -1,6 +1,5 @@
 package models;
 
-import com.google.gson.annotations.Until;
 import play.data.validation.Constraints;
 
 import javax.persistence.*;
