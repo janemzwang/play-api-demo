@@ -1,2 +1,0 @@
-insert into property (mls_id, market_status, property_type, listing_price, num_bedroom, num_full_bath, total_room, build_year, version, published_on)
-values (123456, 'for_sale', 'condo', 500000, 1, 1, 3, 2010, 0, curdate());

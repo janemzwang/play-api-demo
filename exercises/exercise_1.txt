@@ -1,0 +1,15 @@
+In PropertyController, given mlsId, how should we look up a property?
+
+String propertyJson = session(String.valueOf(mlsId));
+    if(propertyJson != null) {
+      property = gson.fromJson(propertyJson, Property.class);
+      JsonElement json = gson.toJsonTree(property);
+      String jsonResponse = gson.toJson(json);
+
+      return ok(jsonResponse);
+    } else {
+      return notFound();
+    }
+
+
+How would you measure the performance of this api call?
