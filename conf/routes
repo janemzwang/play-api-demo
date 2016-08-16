@@ -9,3 +9,4 @@ GET     /                           controllers.HomeController.index
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
 
 GET     /api/property/:id           controllers.PropertyController.getById(id: Int)
+POST    /api/property               controllers.PropertyController.createProperty()

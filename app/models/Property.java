@@ -12,7 +12,7 @@ import javax.validation.constraints.Min;
  */
 @Entity
 @Table(name = "property")
-public class Property extends BaseModel {
+public class Property {
   @Id
   @GeneratedValue(strategy= GenerationType.IDENTITY)
   @Column(name = "id")
