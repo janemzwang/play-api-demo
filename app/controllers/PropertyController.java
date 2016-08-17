@@ -9,7 +9,9 @@ import dao.DaoFactory;
 import models.BaseModel;
 import models.Property;
 import org.apache.commons.lang3.StringUtils;
+import play.data.Form;
 import play.db.jpa.Transactional;
+import play.mvc.BodyParser;
 import play.mvc.Controller;
 import play.mvc.Result;
 
@@ -72,6 +74,62 @@ public class PropertyController extends Controller {
     } catch (Exception e) {
       play.Logger.error("get failed", e);
       return internalServerError(e.getMessage());
+    }
+  }
+
+  @Transactional
+  public Result post() {
+    try {
+      Form<Property> form = Form.form(Property.class).bindFromRequest();
+      if (form.hasErrors()) {
+        return badRequest("Request body data doesn't conform to expected format.");
+      }
+      Property property = form.get();
+      //what should we check here? What if property with the same mlsId exists?
+
+      property.publishedOn = System.currentTimeMillis();
+      return ok("You have successfully created a property.");
+    } catch (Exception e) {
+      play.Logger.error(e.getMessage());
+      return internalServerError();
+    }
+  }
+
+  @Transactional
+  public Result put(int id) {
+    Form<Property> form = Form.form(Property.class).bindFromRequest();
+    if (form.hasErrors()) {
+      return badRequest("Request body data doesn't conform to expected format.");
+    }
+    BaseDao<Property> dao = DaoFactory.getPropertyDAO();
+    Property property = dao.findById(id);
+    if(property == null) {
+      return badRequest();
+    }
+
+    Property putProperty = form.get();
+    if(putProperty.buildYear != null) {
+      property.buildYear = putProperty.buildYear;
+    }
+    if(putProperty.listingPrice != null) {
+      property.listingPrice = putProperty.listingPrice;
+    }
+    if(putProperty.marketStatus != null) {
+      property.marketStatus = putProperty.marketStatus;
+    }
+
+    dao.update(property);
+    return ok(jsonifyResponse(property));
+  }
+
+  @Transactional
+  public Result delete(int id) {
+    BaseDao dao = DaoFactory.getPropertyDAO();
+    boolean isSuccess = dao.delete(id);
+    if(isSuccess) {
+      return ok();
+    } else {
+      return internalServerError();
     }
   }
 

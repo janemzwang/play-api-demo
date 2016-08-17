@@ -59,4 +59,41 @@ public abstract class BaseDao<T extends BaseModel> {
     results.addAll(typedQuery.getResultList());
     return results;
   }
+
+  public T insert (T anObject) {
+    try {
+      JPA.em().persist(anObject);
+    } catch(RuntimeException e) {
+      log.error("Insert object failed " + anObject.getClass().getCanonicalName());
+      log.error(e.getMessage());
+      throw e; // or display error message
+    }
+    return anObject;
+  }
+
+  public T update (final T anObject) {
+    try {
+      T mergedObj = JPA.em().merge(anObject);
+      return mergedObj;
+    } catch(RuntimeException e) {
+      log.error("Update object failed " + anObject.getClass().getCanonicalName());
+      throw e; // or display error message
+    }
+  }
+
+  public boolean delete (long aTargetId) {
+    log.debug("deleting instance of [" + getEntityClass().getName() + "] identified by id [" + aTargetId + "]");
+    BaseModel target = findById(aTargetId);
+    if (target != null) {
+      JPA.em().remove(target);
+      return true;
+    }
+    log.debug("instance not found");
+    return false;
+  }
+
+  public void delete (T object) {
+    JPA.em().remove(object);
+  }
+
 }
