@@ -1,6 +1,6 @@
 # play-api-demo
 
-Setup Environment
+A. Setup Environment
 
 1. Install JDK 1.8 from http://www.oracle.com/technetwork/java/javase/downloads/index.html
 2. Install IDEA from https://www.jetbrains.com/idea/download/
@@ -19,8 +19,11 @@ Setup Environment
     activator run
 8. Go to http://localhost:9000
 
+B. Install Sbt Plugin in IDEA
 
-Setup Project in IDEA
+http://jie-qin.github.io/2016/08/16/setup-SBT-with-IntelliJ-CE/
+
+C. Setup Project in IDEA
 
 1. Open IDEA
 2. File -> New -> Project from Existing Sources...
@@ -30,12 +33,12 @@ Setup Project in IDEA
 6. Click Finish
 
 
-Setup MySQL
+D. Setup MySQL
 
 From http://dev.mysql.com/downloads/, download and install the Community Server. WorkBench is also recommended.
 
 
-Run Play app in Debug Mode
+E. Run Play app in Debug Mode
 
 Add this to .bash_profile: alias act_d="activator -jvm-debug 9999"
 
