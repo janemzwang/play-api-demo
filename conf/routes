@@ -9,4 +9,4 @@ GET     /                           controllers.HomeController.index
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
 
 GET     /api/property/:id           controllers.PropertyController.getById(id: Int)
-GET     /api/property               controllers.PropertyController.get()
+GET     /api/property               controllers.PropertyController.getAll()
