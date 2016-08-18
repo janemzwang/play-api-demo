@@ -13,3 +13,5 @@ GET     /api/property               controllers.PropertyController.get()
 POST    /api/property               controllers.PropertyController.post()
 PUT     /api/property/:id           controllers.PropertyController.put(id: Int)
 DELETE  /api/property/:id           controllers.PropertyController.delete(id: Int)
+
+GET     /api/property-media/:propertyId controllers.PropertyController.getMedia(propertyId: Int)

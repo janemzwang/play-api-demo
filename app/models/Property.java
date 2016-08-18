@@ -1,10 +1,14 @@
 package models;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import play.data.validation.Constraints;
 
 import javax.persistence.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Kang Kang Wang
@@ -55,4 +59,8 @@ public class Property extends BaseModel {
 
   @Column(name = "published_on")
   public Long publishedOn;
+
+  @OneToMany(mappedBy = "property", cascade = CascadeType.ALL, orphanRemoval = true)
+  @LazyCollection(LazyCollectionOption.FALSE)
+  public List<PropertyMedia> media = new ArrayList<PropertyMedia>();
 }

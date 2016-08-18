@@ -24,3 +24,19 @@ CREATE TABLE `property` (
   PRIMARY KEY (`id`),
   KEY `idx_deleted` (`deleted`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+DROP TABLE IF EXISTS `property_media`;
+CREATE TABLE `property_media` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `property_id` int(11) unsigned NOT NULL,
+  `url` varchar(1000) DEFAULT NULL,
+  `note` varchar(500) DEFAULT NULL,
+  `version` varchar(45) NOT NULL DEFAULT '0',
+  `deleted` tinyint(1) NOT NULL DEFAULT '0',
+  `created_on` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `last_updated` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `idx_deleted` (`deleted`),
+  CONSTRAINT `property_property_media_fk` FOREIGN KEY (`property_id`) REFERENCES `property` (`id`) ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

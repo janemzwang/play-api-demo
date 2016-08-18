@@ -14,6 +14,7 @@ import play.db.jpa.Transactional;
 import play.mvc.BodyParser;
 import play.mvc.Controller;
 import play.mvc.Result;
+import services.PropertyService;
 
 import java.lang.reflect.Field;
 import java.util.Arrays;
@@ -131,6 +132,14 @@ public class PropertyController extends Controller {
     } else {
       return internalServerError();
     }
+  }
+
+  @Transactional
+  public Result getMedia(int propertyId) {
+    PropertyService propertyService = new PropertyService();
+
+    List<String> mediaUrls = propertyService.getMediaUrls(propertyId);
+    return ok(jsonifyResponse(mediaUrls));
   }
 
   protected PaginationContext extractPaginationContext() {
