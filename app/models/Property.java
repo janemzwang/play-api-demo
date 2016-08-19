@@ -1,6 +1,10 @@
 package models;
 
 import play.data.validation.Constraints;
+import play.data.validation.ValidationError;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Kang Kang Wang
@@ -39,4 +43,9 @@ public class Property {
 
   public Long publishedOn;
 
+  public List<ValidationError> validate() {
+    List<ValidationError> errors = new ArrayList<ValidationError>();
+    
+    return errors.isEmpty() ? null : errors;
+  }
 }
