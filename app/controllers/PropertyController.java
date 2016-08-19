@@ -44,13 +44,13 @@ public class PropertyController extends Controller {
         return badRequest("Request body data doesn't conform to expected format.");
       }
       Property property = form.get();
-      property.setId(property_id++);
+      property.id = (property_id++);
       //what should we check here? What if property with the same mlsId exists?
 
-      property.setPublishedOn(System.currentTimeMillis());
+      property.publishedOn = System.currentTimeMillis();
 
       Gson gson = new GsonBuilder().create();
-      store.put(String.valueOf(property.getMlsId()), gson.toJson(property));
+      store.put(String.valueOf(property.mlsId), gson.toJson(property));
     } catch (Exception e) {
       play.Logger.error(e.getMessage());
       return internalServerError();
@@ -69,10 +69,10 @@ public class PropertyController extends Controller {
         return badRequest("Request body data doesn't conform to expected format.");
       }
       Property property = form.get();
-      property.setMlsId(Long.valueOf(mlsId));
+      property.mlsId = Long.valueOf(mlsId);
 
       Gson gson = new GsonBuilder().create();
-      store.put(String.valueOf(property.getMlsId()), gson.toJson(property));
+      store.put(String.valueOf(property.mlsId), gson.toJson(property));
     } catch (Exception e) {
       play.Logger.error(e.getMessage());
       return internalServerError();
