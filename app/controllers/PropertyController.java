@@ -89,6 +89,8 @@ public class PropertyController extends Controller {
       //what should we check here? What if property with the same mlsId exists?
 
       property.publishedOn = System.currentTimeMillis();
+      BaseDao dao = DaoFactory.getPropertyDAO();
+      dao.insert(property);
       return ok("You have successfully created a property.");
     } catch (Exception e) {
       play.Logger.error(e.getMessage());
